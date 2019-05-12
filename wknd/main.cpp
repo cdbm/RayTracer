@@ -9,8 +9,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-float MAXFLOAT = 9999999.0;
-
 vec3 color (const ray& r, hitable *world){
     hit_record rec;
     if(world->hit(r, 0.0, MAXFLOAT, rec)){
@@ -40,6 +38,11 @@ int main(){
     string nomeMaterial = "";
     map<string,vector<float>> materiais;
     vector <float> caractMaterial;
+    hitable *list[10000];
+    int qtdeEsferas = 0;
+    int contEsferas = 0;
+    int caractEsferas[4];
+    int raioEsfera = 0;
  	while (inFile >> rd) {
   		if(rd.substr(0,3) == "res"){
            contRes = 1;
@@ -52,7 +55,6 @@ int main(){
         }else if(rd.substr(0,6) == "camera"){
             contCam = 1;
   		}else if(contCam >= 1 && contCam <= 11){
-            //cout << rd << endl;
             cam[contCam-1] = stof(rd);
             contCam++;
         }else if(rd.substr(0,8) == "material"){
@@ -73,24 +75,34 @@ int main(){
                 cout << a << endl;
             }
             contMaterial = 0;
+        }else if(rd == "sphere"){
+            contEsferas = 1;
+        }else if(contEsferas >= 1 && contEsferas <= 5){
+            if(contEsferas <= 3){
+                caractEsferas[contEsferas-1] = stoi(rd);
+                contEsferas++;
+            }else if(contEsferas == 4){
+                raioEsfera = stof(rd);
+                contEsferas++;
+            }else if(contEsferas == 5){
+                list[qtdeEsferas] = new sphere(vec3(caractEsferas[0],caractEsferas[1],caractEsferas[2]), raioEsfera);
+            }
         }
 	}
     
-    //cout << cam[10] << " " << cam[0];
 	inFile.close();
     int nx = 200;
     int ny = 100;
-    //cout << "P3\n"<< nx << " " << ny << "\n255\n";
+    cout << "P3\n"<< nx << " " << ny << "\n255\n";
     vec3 lower_left_corner(-2.0, -1.0, -1.0);
     vec3 horizontal(4.0, 0.0, 0.0);
     vec3 vertical(0.0, 2.0, 0.0);
     vec3 origin (0.0, 0.0, 0.0); 
-    hitable *list[2];
     list[0] = new sphere(vec3(0,0,-1), 0.5);
     list[1] = new sphere(vec3(0,-100.5,-1), 100);
     hitable *world = new hitable_list(list,2);
 
-    /*for(int j=ny-1; j>=0;j--){
+    for(int j=ny-1; j>=0;j--){
         for(int i=0; i<nx;i++){
             float u = float(i)/float(nx);
             float v = float(j)/float(ny);
@@ -103,6 +115,6 @@ int main(){
             cout << ir << " " << ig << " " << ib << "\n";
 
         }
-    } */
+    } 
 
 }
