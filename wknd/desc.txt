@@ -1,0 +1,13 @@
+#comentário
+
+#resolução
+res 600 400
+
+#câmera
+camera 10.0 10.0 10.0 10.0 10.0 10.0 10.0 10.0 10.0 10.0 101.5
+
+#materiais
+material name r g b kd ks ke alpha
+
+#objetos
+sphere cx cy cz r materialName
