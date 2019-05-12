@@ -7,7 +7,7 @@ res 600 400
 camera 10.0 10.0 10.0 10.0 10.0 10.0 10.0 10.0 10.0 10.0 101.5
 
 #materiais
-material name r g b kd ks ke alpha
+material pedra 200 200 200 0.5 0.5 0.5 0.5
 
 #objetos
 sphere cx cy cz r materialName

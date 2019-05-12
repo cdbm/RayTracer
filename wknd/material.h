@@ -43,6 +43,22 @@ vec3 reflect(const vec3& v, const vec3& n) {
 
 class material  {
     public:
+        int r;
+        int g;
+        int b;
+        float kd;
+        float ks;
+        float ke;
+        float alpha;
+        material(int r1, int g1, int b1, float kd1, float ks1, float ke1, float alpha1){
+            r = r1;
+            g = g1;
+            b = b1;
+            kd = kd1;
+            ks = ks1;
+            ke = ke1;
+            alpha = alpha1;
+        }
         virtual bool scatter(int r, int g, int b, float kd, float ks, float ke, float alpha);
 };
 
